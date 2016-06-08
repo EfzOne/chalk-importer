@@ -9,14 +9,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/SkyZH/chalk-importer.git"
+    "url": "git+https://github.com/EfzOne/chalk-importer.git"
   },
   "author": "SkyZH",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/SkyZH/chalk-importer/issues"
+    "url": "https://github.com/EfzOne/chalk-importer/issues"
   },
-  "homepage": "https://github.com/SkyZH/chalk-importer#readme",
+  "homepage": "https://github.com/EfzOne/chalk-importer#readme",
   "dependencies": {
     "csv-parse": "^1.1.1",
     "debug": "^2.2.0",
