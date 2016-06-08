@@ -45,6 +45,10 @@ Step(
   },
   function(err) {
     if(err) return console.error(err);
+    Chalk.Lesson.remove({}, this);
+  },
+  function(err) {
+    if(err) return console.error(err);
     var group = this.group();
     debug("Writing Student Data...");
     _(_.map(config.row, (cls, col) => {
@@ -65,16 +69,54 @@ Step(
   },
   function(err) {
     if(err) return console.error(err);
-    var group = this.group();
-    debug("Writing Type Data...");
+    var students = {};
+    debug("Collecting Type Data...");
     _(config.row).forEach((cls, col) => {
+      var __type_id = Const.type[cls];
       _.chain(data).map(col).without("").tail().value().forEach((id) => {
-        var type = new Chalk.Type({
-          id: id,
-          typeId: Const.lesson[cls]
-        });
-        type.save(group());
+        if(!(id in students)) {
+          students[id] = [];
+        }
+        students[id].push(__type_id);
       });
+    });
+    this(null, students);
+  },
+  function(err, result) {
+    if(err) return console.error(err);
+    debug("Writing Type Data...");
+    var group = this.group();
+    _(result).forEach((types, id) => {
+      var type = new Chalk.Type({
+        id: id,
+        types: types
+      });
+      type.save(group());
+    });
+  },
+  function(err, students) {
+    if(err) return console.error(err);
+    debug("Writing Lesson Data...");
+    var group = this.group();
+    _(students).forEach((student) => {
+      _(Const.lesson).forEach((lessons, typeId) => {
+        var lesson;
+        if(typeId in student.types) {
+          lesson = new Chalk.Lesson({
+            id: student.id,
+            lessonId: lessons[0]
+          });
+        } else {
+          lesson = new Chalk.Lesson({
+            id: student.id,
+            lessonId: lessons[1]
+          });
+        }
+        if(lesson.lesson != -1) {
+          lesson.save(group());
+        }
+      });
+
     });
   },
   function(err, results) {
