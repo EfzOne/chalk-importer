@@ -45,7 +45,7 @@ Step(
   },
   function(err) {
     if(err) return console.error(err);
-    Chalk.Lesson.remove({}, this);
+    Chalk.Course.remove({}, this);
   },
   function(err) {
     if(err) return console.error(err);
@@ -55,16 +55,17 @@ Step(
       return _.chain(data).map(col).without("").tail().value();
     })).flatten().uniq().value().forEach((id) => {
       var student = new Chalk.Student({
-        id: id,
+        studentId: id,
         year: (Math.floor(id / 10000) % 10000),
         class: (Math.floor(id / 100) % 100),
         number: (id % 100)
       });
       if(student.year == 2018) {
-        student.save(group());
+
       } else {
         debug("Invaild data found: %d", id);
       }
+      student.save(group());
     });
   },
   function(err) {
@@ -88,7 +89,7 @@ Step(
     var group = this.group();
     _(result).forEach((types, id) => {
       var type = new Chalk.Type({
-        id: id,
+        studentId: id,
         types: types
       });
       type.save(group());
@@ -96,24 +97,24 @@ Step(
   },
   function(err, students) {
     if(err) return console.error(err);
-    debug("Writing Lesson Data...");
+    debug("Writing Course Data...");
     var group = this.group();
     _(students).forEach((student) => {
-      _(Const.lesson).forEach((lessons, typeId) => {
-        var lesson;
-        if(typeId in student.types) {
-          lesson = new Chalk.Lesson({
-            id: student.id,
-            lessonId: lessons[0]
+      _(Const.course).forEach((courses, typeId) => {
+        var course;
+        if(_.includes(student.types, typeId)) {
+          course = new Chalk.Course({
+            studentId: student.studentId,
+            courseId: courses[0]
           });
         } else {
-          lesson = new Chalk.Lesson({
-            id: student.id,
-            lessonId: lessons[1]
+          course = new Chalk.Course({
+            studentId: student.studentId,
+            courseId: courses[1]
           });
         }
-        if(lesson.lesson != -1) {
-          lesson.save(group());
+        if(course.courseId != -1) {
+          course.save(group());
         }
       });
 

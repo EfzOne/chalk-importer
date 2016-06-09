@@ -1,5 +1,5 @@
 module.exports = {
-  "lesson": [
+  "course": [
     [0, 1],
     [2, 3],
     [4, -1],
