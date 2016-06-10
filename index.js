@@ -60,9 +60,7 @@ Step(
         class: (Math.floor(id / 100) % 100),
         number: (id % 100)
       });
-      if(student.year == 2018) {
-
-      } else {
+      if(student.year != 2018) {
         debug("Invaild data found: %d", id);
       }
       student.save(group());
