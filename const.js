@@ -14,5 +14,11 @@ module.exports = {
     "physiology": 3,
     "history": 4,
     "politics": 5
+  },
+  "data": {
+    "path": __dirname + "/data/data.csv"
+  },
+  "database": {
+    "host": "mongodb://localhost/chalk"
   }
 };
