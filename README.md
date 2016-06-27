@@ -1,5 +1,7 @@
 # chalk-importer
 
+[![Dependency Status](https://david-dm.org/EfzOne/chalk-importer.svg)](https://david-dm.org/EfzOne/chalk-importer)
+
 Import Student Data to Database
 
 ## Data Example `data.csv`
@@ -16,10 +18,8 @@ The first two rows should not contain student data. From the third row, put stud
 
 ## Database
 
-This script will create three documents: `students`, `lessons` and `types`.
+This script will create three documents: `students`, `courses`.
 
-`students` includes information about each student.
+`students` includes information of each student. Also, this script will add courses one selects in it.
 
-`types` includes information about course selected by a student.
-
-`lessons` includes information about which course(s) a student may attend.
+`courses` includes information of all courses.

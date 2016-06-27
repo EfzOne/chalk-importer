@@ -7,7 +7,7 @@ var Step = require('step');
 var fs = require('fs');
 var debug = require('debug')('chalk:importer');
 
-var Const = require('./const');
+var Const = require('./data/const');
 var Chalk = require('./Chalk');
 
 
