@@ -63,7 +63,7 @@ Step(
     if(err) throw err;
     debug("Writing Course Data...");
     var group = this.group();
-    _(Const.type).forEach((typeId, name) => {
+    _(Const.type).forEach((name, typeId) => {
       _(Const.course[typeId]).forEach((courseId, cnt) => {
         if(courseId != -1) {
           var course = new Chalk.Course({
@@ -74,6 +74,11 @@ Step(
         }
       });
     });
+    var course = new Chalk.Course({
+      _id: 20,
+      name: "ordinary"
+    });
+    course.save(group());
   },
   function(err) {
     if(err) throw err;

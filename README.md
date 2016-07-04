@@ -8,13 +8,51 @@ Import Student Data to Database
 
 ```
 | . | Physics    | . | . | . | Chemistry  | . | . | . | Geography  | . | . | . | Physiology | . | . | . | History    | . | . | . | Politics   | . | . |
-| - | ---------- | - | - | - | ---------- | - | - | - | ---------- | - | - | - | ---------- | - | - | - | ---------- | - | - | - | ---------- | - | - |
 | . | .......... | . | . | . | .......... | . | . | . | .......... | . | . | . | .......... | . | . | . | .......... | . | . | . | .......... | . | . |
 | . | 20180101   | . | . | . | 20180101   | . | . | . | 20180101   | . | . | . | 20180102   | . | . | . | 20180102   | . | . | . | 20180104   | . | . |
 | . | 20180101   | . | . | . | 20180101   | . | . | . | 20180101   | . | . | . | 20180102   | . | . | . | 20180102   | . | . | . | 20180104   | . | . |
 ```
 
 The first two rows should not contain student data. From the third row, put students' id in specified columns if he or she select this course.
+
+## Config
+
+Create `/data/const.js` to store config.
+
+```
+module.exports = {
+  "course": [
+    [0, 1],
+    [2, 3],
+    [4, -1],
+    [6, -1],
+    [8, 9],
+    [10, 11]
+  ],
+  "type": [
+    "physics",
+    "chemistry",
+    "geography",
+    "physiology",
+    "history",
+    "politics"
+  ],
+  "data": {
+    "path": __dirname + "/data.csv"
+  },
+  "database": {
+    "host": "mongodb://localhost/chalk"
+  }
+};
+```
+
+```
+  "course": [
+    [0, 1],
+    [2, 3],
+```
+
+Here `[0, 1]` means that type[0], physics, has two courses: course[0] physics-adv and course[1] physics-std.
 
 ## Database
 
